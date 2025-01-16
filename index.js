@@ -12,18 +12,26 @@ function miniBank(balance) {
     this.balance = value;
   };
 
-//Write an update Statement function that takes an number and push() it to the statement array
+  //Write an update Statement function that takes an number and push() it to the statement array
 
-this.updateStatement = (value)=>{
+  this.updateStatement = (value) => {
     this.statement.push(value);
-}
+  };
+  //Write an getStatement function that return a `statement` property
+  this.getStatement = () => {
+    return this.statement.slice(0);
+  };
+
+  //Write a `printStatement` function that prints each element in the `statement` array on it own line.
+  this.printStatement = () => {
+    const statement = this.getStatement();
+    for (let i = 0; i < statement.length; i++) {
+      console.log(`${i + 1}.${statement[i]}`);
+    }
+  };
 
 
 
 
-
-
-
-
-
+  
 }

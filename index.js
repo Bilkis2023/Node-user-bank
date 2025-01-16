@@ -29,9 +29,18 @@ function miniBank(balance) {
       console.log(`${i + 1}.${statement[i]}`);
     }
   };
+  //Write a deposit function that takes a value and performs the followin:
+  // - Calls a updateStatement to record the deposite transaction.
+  // - Calls a setBalance to update the balance property
+  this.deposit = (value) => {
+    if (typeof value !== number || value <= 0) {
+      throw new Error("`value` must be a positive number!");
+    }
 
+    const newBalance = this.getBalance() + value;
 
-
-
-  
+    this.updateStatement(newBalance);
+    this.setBalance(newBalance);
+    console.log(`deposited ${value}!`);
+  };
 }

@@ -1,6 +1,6 @@
 // Update a miniBank constructor function with methods and properties 👍
 //Define a property named `statement`. Assign an initial value of an array containing the `balance` parameter passed to the constructor..
-function miniBank(balance) {
+function MiniBank(balance) {
   this.balance = balance;
   this.statement = [balance];
   //add a `setBalance` function. This function should receive a `value` parameter and assign it to the `balance` property of `MiniBank`
@@ -26,14 +26,14 @@ function miniBank(balance) {
   this.printStatement = () => {
     const statement = this.getStatement();
     for (let i = 0; i < statement.length; i++) {
-      console.log(`${i + 1}.${statement[i]}`);
+      console.log(`${i + 1}. ${statement[i]}`);
     }
   };
   //Write a deposit function that takes a value and performs the followin:
   // - Calls a updateStatement to record the deposite transaction.
   // - Calls a setBalance to update the balance property
   this.deposit = (value) => {
-    if (typeof value !== number || value <= 0) {
+    if (typeof value !== 'number' || value <= 0) {
       throw new Error("`value` must be a positive number!");
     }
 
@@ -41,30 +41,51 @@ function miniBank(balance) {
 
     this.updateStatement(newBalance);
     this.setBalance(newBalance);
-    console.log(`deposited ${value}!`);
+    console.log(`Deposited ${value}!`);
   };
-  
+
   //Write a withdraw function that takes a value and performs the following 👍
   // - Calls updateStatement to record the withdrawal transaction.(to be a negative number here)
- // - Calls setBalance to update the balance property.
+  // - Calls setBalance to update the balance property.
 
- this.withdraw = (value)=>{
-    if(typeof value !== "number" || value <= 0){
-     throw new Error("`value` must be a positive number!");
+  this.withdraw = (value) => {
+    if (typeof value !== 'number' || value <= 0) {
+      throw new Error("`value` must be a positive number!");
     }
 
-     const newBalance = this.getBalance() - value;
-     if(newBalane < 0){
-        throw new Error("Insufficient funds for this transaction");
-     }
+    const newBalance = this.getBalance() - value;
+    if (newBalance < 0) {
+      throw new Error("Insufficient funds for this transaction");
+    }
 
+    this.setBalance(newBalance);
+    this.updateStatement(-value);
+    console.log(`Withdraw ${value}`);
+  };
 
-     this.setBalance(newBalance)
-     this.updateStatement(- value);
-     console.log(`Withdraw ${value}`);
-     
- }
-
-
-
+  this.printBalance = () => {
+    console.log(`Balance: ${this.getBalance()}`);
+  };
 }
+const bank = new MiniBank(0);
+polen = "a bank account";
+
+bank.printBalance();
+
+bank.deposit(50);
+bank.printBalance();
+
+bank.withdraw(20);
+bank.printBalance();
+bank.printStatement();
+
+//Prints:
+// node index.js
+// Balance: 0
+// Deposited 50!
+// Balance: 50
+// Withdraw 20
+// Balance: 30
+// 1. 0
+// 2. 50
+// 3. -20

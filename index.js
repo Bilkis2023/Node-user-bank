@@ -43,4 +43,28 @@ function miniBank(balance) {
     this.setBalance(newBalance);
     console.log(`deposited ${value}!`);
   };
+  
+  //Write a withdraw function that takes a value and performs the following 👍
+  // - Calls updateStatement to record the withdrawal transaction.(to be a negative number here)
+ // - Calls setBalance to update the balance property.
+
+ this.withdraw = (value)=>{
+    if(typeof value !== "number" || value <= 0){
+     throw new Error("`value` must be a positive number!");
+    }
+
+     const newBalance = this.getBalance() - value;
+     if(newBalane < 0){
+        throw new Error("Insufficient funds for this transaction");
+     }
+
+
+     this.setBalance(newBalance)
+     this.updateStatement(- value);
+     console.log(`Withdraw ${value}`);
+     
+ }
+
+
+
 }
